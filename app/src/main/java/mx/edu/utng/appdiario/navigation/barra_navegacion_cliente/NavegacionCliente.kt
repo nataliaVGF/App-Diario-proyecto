@@ -92,11 +92,12 @@ fun NavegacionCliente(globalNavController: NavHostController) {
             }
 
             // DETALLE DIARIO TEXTO - Recibe idTarjeta como parámetro
-            composable("detalle_diario/{idTarjeta}") { backStackEntry ->
+            composable("detalle_diario/{diarioTextoId}") { backStackEntry ->
                 showBottomBar.value = true
-                val idTarjeta = backStackEntry.arguments?.getString("idTarjeta")?.toIntOrNull()
+                val diarioTextoId = backStackEntry.arguments?.getString("diarioTextoId")?.toIntOrNull() ?: 0
                 DetalleDiarioScreen(
                     navController = navController,
+                    diarioTextoId = diarioTextoId
                 )
             }
 
@@ -148,9 +149,14 @@ fun NavegacionCliente(globalNavController: NavHostController) {
             }
 
             // DETALLE AUDIO
-            composable("detalle_diario_audio") {
+// En tu archivo de navegación (barra_navegacion_cliente)
+            composable("detalle_diario_audio/{audioId}") { backStackEntry ->
                 showBottomBar.value = true
-                DetalleDiarioAudioScreen(navController = navController)
+                val audioId = backStackEntry.arguments?.getString("audioId")?.toIntOrNull() ?: 0
+                DetalleDiarioAudioScreen(
+                    navController = navController,
+                    audioId = audioId
+                )
             }
 
             // CREAR AUDIO

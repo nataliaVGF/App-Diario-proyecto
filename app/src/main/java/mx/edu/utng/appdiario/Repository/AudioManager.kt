@@ -94,6 +94,7 @@ class AudioManager(private val context: Context) {
         }
     }
 
+    // MÉTODO ORIGINAL - reproduce solo el archivo grabado
     fun startPlaying(onCompletion: () -> Unit = {}) {
         audioFile?.let { file ->
             try {
@@ -120,25 +121,78 @@ class AudioManager(private val context: Context) {
                         setOnErrorListener { _, what, extra ->
                             Log.e("AudioManager", "❌ Error en reproducción: what=$what extra=$extra")
                             stopPlaying()
+                            onCompletion()
                             true
                         }
                         prepareAsync()
                     }
                 } else {
                     Log.e("AudioManager", "❌ Archivo inexistente o corrupto")
+                    onCompletion()
                 }
             } catch (e: Exception) {
                 Log.e("AudioManager", "❌ Error al iniciar reproducción: ${e.message}")
                 e.printStackTrace()
                 stopPlaying()
+                onCompletion()
             }
-        } ?: Log.e("AudioManager", "❌ No hay archivo para reproducir")
+        } ?: run {
+            Log.e("AudioManager", "❌ No hay archivo para reproducir")
+            onCompletion()
+        }
+    }
+
+    // NUEVO MÉTODO - reproduce cualquier archivo por su ruta
+    fun startPlaying(audioFilePath: String, onCompletion: () -> Unit = {}) {
+        try {
+            stopPlaying()
+
+            val file = File(audioFilePath)
+            Log.d("AudioManager", "🔍 Verificando archivo para reproducción: $audioFilePath")
+            Log.d("AudioManager", "   - Existe: ${file.exists()}")
+            Log.d("AudioManager", "   - Tamaño: ${file.length()} bytes")
+            Log.d("AudioManager", "   - Lectura: ${file.canRead()}")
+
+            if (file.exists() && file.length() > 1000) {
+                mediaPlayer = MediaPlayer().apply {
+                    setDataSource(audioFilePath)
+                    setOnPreparedListener {
+                        start()
+                        this@AudioManager.isPlaying = true
+                        Log.d("AudioManager", "▶️ Reproducción iniciada: $audioFilePath")
+                    }
+                    setOnCompletionListener {
+                        stopPlaying()
+                        onCompletion()
+                        Log.d("AudioManager", "✅ Reproducción finalizada: $audioFilePath")
+                    }
+                    setOnErrorListener { _, what, extra ->
+                        Log.e("AudioManager", "❌ Error en reproducción: what=$what extra=$extra")
+                        stopPlaying()
+                        onCompletion()
+                        true
+                    }
+                    prepareAsync()
+                }
+            } else {
+                Log.e("AudioManager", "❌ Archivo inexistente o corrupto: $audioFilePath")
+                onCompletion()
+            }
+        } catch (e: Exception) {
+            Log.e("AudioManager", "❌ Error al iniciar reproducción: ${e.message}")
+            e.printStackTrace()
+            stopPlaying()
+            onCompletion()
+        }
     }
 
     fun stopPlaying() {
         try {
             mediaPlayer?.apply {
-                if (isPlaying) stop()
+                if (isPlaying) {
+                    stop()
+                    Log.d("AudioManager", "⏹️ Reproducción detenida")
+                }
                 release()
             }
         } catch (e: Exception) {
@@ -147,6 +201,42 @@ class AudioManager(private val context: Context) {
         } finally {
             mediaPlayer = null
             isPlaying = false
+        }
+    }
+
+    // NUEVO MÉTODO - obtener duración de un archivo de audio
+    fun getAudioDuration(audioFilePath: String): Int {
+        return try {
+            val mediaPlayer = MediaPlayer()
+            mediaPlayer.setDataSource(audioFilePath)
+            mediaPlayer.prepare()
+            val duration = mediaPlayer.duration / 1000 // convertir a segundos
+            mediaPlayer.release()
+            Log.d("AudioManager", "⏱️ Duración del audio: ${duration}s")
+            duration
+        } catch (e: Exception) {
+            Log.e("AudioManager", "❌ Error obteniendo duración: ${e.message}")
+            0
+        }
+    }
+
+    // NUEVO MÉTODO - verificar si un archivo es reproducible
+    fun isAudioFilePlayable(audioFilePath: String): Boolean {
+        return try {
+            val file = File(audioFilePath)
+            val exists = file.exists()
+            val size = file.length()
+            val playable = exists && size > 1000
+
+            Log.d("AudioManager", "🔍 Verificando archivo: $audioFilePath")
+            Log.d("AudioManager", "   - Existe: $exists")
+            Log.d("AudioManager", "   - Tamaño: $size bytes")
+            Log.d("AudioManager", "   - Reproducible: $playable")
+
+            playable
+        } catch (e: Exception) {
+            Log.e("AudioManager", "❌ Error verificando archivo: ${e.message}")
+            false
         }
     }
 
