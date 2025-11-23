@@ -468,18 +468,6 @@ fun DetalleDiarioAudioScreen(
                         .padding(top = 16.dp)
                 )
 
-                // Información de depuración (opcional - puedes quitarlo después)
-                if (diarioAudio != null) {
-                    Text(
-                        text = "Ruta: ${diarioAudio!!.archivo}",
-                        color = Color(0xFF4E2A0E).copy(alpha = 0.5f),
-                        fontSize = 10.sp,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 8.dp),
-                        textAlign = TextAlign.Center
-                    )
-                }
             }
         }
     }

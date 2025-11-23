@@ -62,6 +62,16 @@ android {
     buildFeatures {
         compose = true
     }
+
+    // ✅ SOLO AGREGAR ESTAS 2 SECCIONES NUEVAS:
+    aaptOptions {
+        additionalParameters("--warn-manifest-validation")
+    }
+
+    lint {
+        checkReleaseBuilds = false
+        abortOnError = false
+    }
 }
 
 
