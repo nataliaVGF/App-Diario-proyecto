@@ -1,6 +1,7 @@
 package mx.edu.utng.appdiario.Repository
 
 import mx.edu.utng.appdiario.local.dao.UsuarioDao
+import mx.edu.utng.appdiario.local.entity.Ususario.TipoUsuario
 import mx.edu.utng.appdiario.local.entity.Ususario.Usuario
 
 class UsuarioRepository(
@@ -50,5 +51,23 @@ class UsuarioRepository(
     // Método adicional para verificar email único
     suspend fun verificarEmailUnico(email: String): Boolean {
         return usuarioDao.obtenerTodos().none { it.email == email }
+    }
+
+    suspend fun crearUsuarioAdmin() {
+        val admin = Usuario(
+            nombre = "Admin",
+            apellidoPa = "Sistema",
+            apellidoMa = "AppDiario",
+            fechNaci = "2000-01-01",
+            email = "admin@gmail.com",
+            password = "Admin.123", // Puedes cambiar esta contraseña
+            tipo = TipoUsuario.ADMIN
+        )
+        usuarioDao.insertar(admin)
+    }
+
+    suspend fun existeAdmin(): Boolean {
+        val usuarios = usuarioDao.obtenerTodos()
+        return usuarios.any { it.tipo == TipoUsuario.ADMIN }
     }
 }

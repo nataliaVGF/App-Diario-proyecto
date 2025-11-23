@@ -5,6 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import mx.edu.utng.appdiario.Repository.UsuarioRepository
 import mx.edu.utng.appdiario.local.dao.*
 import mx.edu.utng.appdiario.local.entity.*
 import mx.edu.utng.appdiario.local.entity.Diario.DiarioAudio
@@ -13,6 +17,7 @@ import mx.edu.utng.appdiario.local.entity.Tarjeta.Tarjeta
 import mx.edu.utng.appdiario.local.entity.Tarjeta.TipoTarjetaConverter
 import mx.edu.utng.appdiario.local.entity.Ususario.TipoUsuarioConverter
 import mx.edu.utng.appdiario.local.entity.Ususario.Usuario
+import mx.edu.utng.appdiario.ui.screens.administrador.AdminInitializer
 
 @Database(
     entities = [
@@ -48,8 +53,26 @@ abstract class AppDatabase : RoomDatabase() {
                 )
                     .fallbackToDestructiveMigration() // 🔹 Borra y recrea la DB si cambia la versión
                     .build()
+
                 INSTANCE = instance
+
+                // 🔹 INICIALIZAR ADMIN DESPUÉS DE CREAR LA BASE DE DATOS
+                initializeAdmin(context, instance)
+
                 instance
+            }
+        }
+
+        private fun initializeAdmin(context: Context, database: AppDatabase) {
+            val scope = CoroutineScope(Dispatchers.IO)
+            scope.launch {
+                try {
+                    val usuarioRepository = UsuarioRepository(database.usuarioDao())
+                    val adminInitializer = AdminInitializer(context, usuarioRepository)
+                    adminInitializer.initializeAdminIfNeeded()
+                } catch (e: Exception) {
+                    println("❌ Error al inicializar admin en AppDatabase: ${e.message}")
+                }
             }
         }
     }
