@@ -5,8 +5,7 @@ import android.content.SharedPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import mx.edu.utng.appdiario.Repository.UsuarioRepository
-import mx.edu.utng.appdiario.local.entity.Ususario.TipoUsuario
+import mx.edu.utng.appdiario.repository.UsuarioRepository
 
 class AdminInitializer(
     private val context: Context,

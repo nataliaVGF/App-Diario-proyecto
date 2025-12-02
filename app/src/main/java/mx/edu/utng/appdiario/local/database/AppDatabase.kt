@@ -8,9 +8,8 @@ import androidx.room.TypeConverters
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import mx.edu.utng.appdiario.Repository.UsuarioRepository
+import mx.edu.utng.appdiario.repository.UsuarioRepository
 import mx.edu.utng.appdiario.local.dao.*
-import mx.edu.utng.appdiario.local.entity.*
 import mx.edu.utng.appdiario.local.entity.Diario.DiarioAudio
 import mx.edu.utng.appdiario.local.entity.Diario.DiarioTexto
 import mx.edu.utng.appdiario.local.entity.Tarjeta.Tarjeta

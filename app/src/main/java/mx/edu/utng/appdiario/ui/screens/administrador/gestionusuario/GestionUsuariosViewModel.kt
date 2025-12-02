@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import mx.edu.utng.appdiario.Repository.UsuarioRepository
+import mx.edu.utng.appdiario.repository.UsuarioRepository
 import mx.edu.utng.appdiario.local.entity.Ususario.TipoUsuario
 
 data class UsuarioState(

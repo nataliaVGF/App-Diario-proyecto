@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
-import mx.edu.utng.appdiario.navigation.navegacion_global.NavegacionApp
+import mx.edu.utng.appdiario.navigation.navegacionglobal.NavegacionApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
