@@ -19,7 +19,7 @@ UI:Composable+Material Design 3
 Arquitectura:MVVM
 
 Instalacion
-descarga del repositorio 
+descarga del repositorio https://github.com/nataliaVGF/App-Diario-proyecto.git
 Abre el proyecto en Android Studio
 Haz click en file Open
 Selecciona la carpeta Diario-App-Android
