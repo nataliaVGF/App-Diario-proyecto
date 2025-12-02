@@ -1,15 +1,16 @@
+Descripcion del proyecto
 DiarioApp es una aplicación de diario personal
 diseñada para que los usuarios puedan registrar sus
 pensamientos, actividades y emociones tanto mediante 
 entradas de texto como grabaciones de audio con diferentes 
 filtros de organizacion (receta,personal,actividades)
 
-
 Caracteristicas Principales
-Crea tus propias notas y audios de forma ordenada y segura
-Las notas y audios estan catalogadas por tipo de diario y fecha 
-Edita y elimina las existentes 
-Privacidad integrada
+1.-Crea tus propias notas y audios de forma ordenada y segura
+2.-Las notas y audios estan catalogadas por tipo de diario y fecha
+3.-Edita y elimina las existentes
+4.-Privasidad integrada
+5.-Recuperacion de cuenta
 
 Tecnologias Implementadas 
 Lenguaje:Kotlin
@@ -18,7 +19,7 @@ Base de Datos:ROOM DaraBase
 UI:Composable+Material Design 3
 Arquitectura:MVVM
 
-Instalacion
+Instrucciones de Instalacion
 descarga del repositorio https://github.com/nataliaVGF/App-Diario-proyecto.git
 Abre el proyecto en Android Studio
 Haz click en file Open
@@ -214,7 +215,5 @@ Estructura del Proyecto
 
 Autores
 Natalia Estefania Gutierrez Vargas
-Rafael
+Brayam Rafael Garcia Martinez
 
-Licencia
-Proyecto académico / MIT / Apache 2.0
