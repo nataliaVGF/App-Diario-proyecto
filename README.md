@@ -28,7 +28,7 @@ Espera a que eel Gradle construya la aplicacion
 Conecta un dispositivo ya sea en el emulador o fisico 
 Click en RUN
 
-Tambien ya esta disponible la aplicacion en AppStore
+Tambien ya esta disponible la aplicacion en PlayStore
 
 Uso de la aplicacion
 Abre la app
@@ -211,7 +211,7 @@ Estructura del Proyecto
     |
     MainActivity
 
-
+Instrucciones 
 
 Autores
 Natalia Estefania Gutierrez Vargas

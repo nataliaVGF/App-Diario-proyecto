@@ -27,7 +27,7 @@ import mx.edu.utng.appdiario.ui.screens.cliente.dashboardcliente.DashboardScreen
 import mx.edu.utng.appdiario.ui.screens.cliente.diarioaudio.detallediarioaudioscreen.DetalleDiarioAudioScreen
 import mx.edu.utng.appdiario.ui.screens.cliente.diarioaudio.listadiariosaudioscreen.ListaDiariosAudioScreen
 import mx.edu.utng.appdiario.ui.screens.cliente.diariotexto.detallediarioscreen.DetalleDiarioScreen
-import mx.edu.utng.appdiario.ui.screens.cliente.diariotexto.listadiariosscreen.ListaDiariosScreen
+import mx.edu.utng.appdiario.ui.screens.cliente.diariotexto.listadiarioscreen.ListaDiariosScreen
 import mx.edu.utng.appdiario.ui.screens.cliente.perfilUsuario.PerfilUsuario
 
 @Composable

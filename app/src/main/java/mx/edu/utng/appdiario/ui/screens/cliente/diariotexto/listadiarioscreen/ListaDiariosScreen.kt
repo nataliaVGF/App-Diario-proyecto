@@ -1,4 +1,4 @@
-package mx.edu.utng.appdiario.ui.screens.cliente.diariotexto.listadiariosscreen
+package mx.edu.utng.appdiario.ui.screens.cliente.diariotexto.listadiarioscreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
